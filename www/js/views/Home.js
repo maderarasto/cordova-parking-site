@@ -3,6 +3,8 @@ import AbstractView from './AbstractView.js';
 export default class Home extends AbstractView {
     constructor(app, params) {
         super(app, params);
+
+        this.events.push({ selector: '.btn-main', type: 'click', handler: this.onMainButtonClick });
     }
 
     template() {
@@ -29,5 +31,18 @@ export default class Home extends AbstractView {
                 </div>
             </div>
         `;
+    }
+
+    onMainButtonClick(event, view) {
+        const button = event.target.classList.contains('btn-main') ? event.target : event.target.parentNode;
+        const mappedRoutes = {
+            'btn-sectors': 'watch-sectors'
+        };
+
+        view.app.next(mappedRoutes[button.id]);
+    }
+
+    onDestroy() {
+
     }
 }
