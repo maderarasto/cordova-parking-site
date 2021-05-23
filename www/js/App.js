@@ -1,5 +1,6 @@
 import Home from './views/Home.js';
 import WatchSectors from './views/WatchSectors.js';
+import MeasureQueueTime from './views/MeasureQueueTime.js';
 
 export default class App {
     constructor() {
@@ -8,6 +9,7 @@ export default class App {
         this.routes = [
             { name: 'home', params: {}, class: Home, view: null },
             { name: 'watch-sectors', params: {}, class: WatchSectors, view: null },
+            { name: 'measure-time', params: {}, class: MeasureQueueTime, view: null },
         ];
 
         screen.orientation.lock('portrait');

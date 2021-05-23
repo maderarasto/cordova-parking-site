@@ -17,7 +17,7 @@ export default class WatchSectors extends AbstractView {
 
     template() {
         return `
-            <div class="watch-sectors">
+            <div class="view watch-sectors">
                 <div class="toolbar bg-primary">
                     <div class="toolbar-title">
                         <button class="btn toolbar-btn"><i class="fas fa-arrow-left fa-lg"></i></button>
@@ -25,42 +25,42 @@ export default class WatchSectors extends AbstractView {
                     </div>
                     <div class="toolbar-options"></div>
                 </div>
-                <div class="sector">
-                    <div class="sector-row">
+                <div class="section">
+                    <div class="section-row">
                         <h3>Sector A</h3>
                         <span class="sector-cars sector-a">0 cars</span>
                     </div>
-                    <div class="sector-row buttons">
+                    <div class="section-row buttons">
                         <button id="sector-a-minus" class="btn btn-primary btn-sector"><i class="fas fa-minus fa-2x"></i></button>
                         <button id="sector-a-plus" class="btn btn-primary btn-sector"><i class="fas fa-plus fa-2x"></i></button>
                     </div>
                 </div>
-                <div class="sector">
-                    <div class="sector-row">
+                <div class="section">
+                    <div class="section-row">
                         <h3>Sector B</h3>
                         <span class="sector-cars sector-b">0 cars</span>
                     </div>
-                    <div class="sector-row buttons">
+                    <div class="section-row buttons">
                         <button id="sector-b-minus" class="btn btn-primary btn-sector"><i class="fas fa-minus fa-2x"></i></button>
                         <button id="sector-b-plus" class="btn btn-primary btn-sector"><i class="fas fa-plus fa-2x"></i></button>
                     </div>
                 </div>
-                <div class="sector">
-                    <div class="sector-row">
+                <div class="section">
+                    <div class="section-row">
                         <h3>Sector C</h3>
                         <span class="sector-cars sector-c">0 cars</span>
                     </div>
-                    <div class="sector-row buttons">
+                    <div class="section-row buttons">
                         <button id="sector-c-minus" class="btn btn-primary btn-sector"><i class="fas fa-minus fa-2x"></i></button>
                         <button id="sector-c-plus" class="btn btn-primary btn-sector"><i class="fas fa-plus fa-2x"></i></button>
                     </div>
                 </div>
-                <div class="sector">
-                    <div class="sector-row">
+                <div class="section">
+                    <div class="section-row">
                         <h3>Sector D</h3>
                         <span class="sector-cars sector-d">0 cars</span>
                     </div>
-                    <div class="sector-row buttons">
+                    <div class="section-row buttons">
                         <button id="sector-d-minus" class="btn btn-primary btn-sector"><i class="fas fa-minus fa-2x"></i></button>
                         <button id="sector-d-plus" class="btn btn-primary btn-sector"><i class="fas fa-plus fa-2x"></i></button>
                     </div>

@@ -50,17 +50,11 @@
     font-size: 48pt;
 }
 
-#app .watch-sectors {
-    display: flex;
-    flex-direction: column;
-    width: 100%;
-    height: 100%;
-}
-
-.watch-sectors .toolbar {
+/************** START OF TOOLBAR STYLES **************/
+.toolbar {
     display: flex;
     width: 100%;
-    height: 65px;
+    min-height: 65px;
 
     justify-content: space-between;
     align-items: center;
@@ -82,30 +76,51 @@
 .toolbar .toolbar-options {
     min-width: 50px;
 }
+/************** END OF TOOLBAR STYLES **************/
 
-.watch-sectors .sector {
+/************** START OF SECTION STYLES ****************/
+#app .view {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    height: 100%;
+}
+
+.view .section {
     margin: 30px 55px 0;
 }
 
-.sector .sector-row {
+.section .section-row {
     display: flex;
     align-items: baseline;
 }
 
-.sector .sector-row.buttons {
+.section .section-row.buttons {
     margin: 15px 0;
     justify-content: space-around;
 }
 
-.sector-row.buttons button {
+.section-row.buttons button {
     width: 75px;
     height: 75px;
+    border-radius: 10px !important;
 }
 
-.sector .sector-row > h3 {
+.section .section-row > h3 {
     font-size: 18pt;
 }
+/************** END OF SECTION STYLES   ****************/
 
-.sector .sector-row .sector-cars {
+.watch-sectors .section .sector-cars {
     margin-left: 10px;
+}
+
+.measure-time .section-row.buttons button {
+    display: flex;
+    min-width: 100px;
+    min-height: 100px;
+
+    flex-direction: column;
+    justify-content: space-evenly;
+    align-items: center;
 }

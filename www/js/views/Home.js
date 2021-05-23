@@ -16,7 +16,7 @@ export default class Home extends AbstractView {
                         <i class="fas fa-th-large"></i>
                         <span class="d-block mt-2 fw-bold">Watch Sectors</span>
                     </button>
-                    <button type="button" id="btn-measure" class="btn btn-primary rounded btn-main">
+                    <button type="button" id="btn-measure-time" class="btn btn-primary rounded btn-main">
                         <i class="fas fa-stopwatch"></i>
                         <span class="d-block mt-2 fw-bold">Measure Queue Time</span>
                     </button>
@@ -36,7 +36,8 @@ export default class Home extends AbstractView {
     onMainButtonClick(event, view) {
         const button = event.target.classList.contains('btn-main') ? event.target : event.target.parentNode;
         const mappedRoutes = {
-            'btn-sectors': 'watch-sectors'
+            'btn-sectors': 'watch-sectors',
+            'btn-measure-time': 'measure-time',
         };
 
         view.app.next(mappedRoutes[button.id]);
