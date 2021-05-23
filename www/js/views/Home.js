@@ -41,8 +41,4 @@ export default class Home extends AbstractView {
 
         view.app.next(mappedRoutes[button.id]);
     }
-
-    onDestroy() {
-
-    }
 }

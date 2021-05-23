@@ -10,16 +10,15 @@ export default class AbstractView {
     }
 
     attachEvents() {
-        const view = this;
-
         this.events.forEach(event => {
             this.app.container.querySelectorAll(event.selector).forEach(element => {
-                element.addEventListener(event.type, this.eventHandler = e => event.handler(e, view), true);
+                element.addEventListener(event.type, e => event.handler(e, this), true);
             });
         });
     }
 
-    onCreate() {
+    onMount() {
+
     }
 
     onDestroy() {

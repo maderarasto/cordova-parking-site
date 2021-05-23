@@ -10,6 +10,7 @@ export default class App {
             { name: 'watch-sectors', params: {}, class: WatchSectors, view: null },
         ];
 
+        screen.orientation.lock('portrait');
         this.next('home');
     }
 
@@ -24,9 +25,9 @@ export default class App {
             throw `There is no route with name '${routeName}'`;
 
         route.view = new route.class(this, route.params);
-        route.view.onCreate();
 
         this.container.innerHTML = route.view.template();
+        route.view.onMount();
         route.view.attachEvents();
 
         this.history.push(route);
@@ -35,17 +36,17 @@ export default class App {
     back() {
         this.history.pop().view.onDestroy();
 
-        if (cordova.platformId === 'browser')
-            return;
+        // if (cordova.platformId === 'browser')
+        //     return;
 
         if (this.history.length === 0)
             navigator.app.exitApp();
 
         const lastRoute = this.history[this.history.length - 1];
         lastRoute.view = new lastRoute.class(this, lastRoute.params);
-        lastRoute.view.onCreate();
 
         this.container.innerHTML = lastRoute.view.template();
+        lastRoute.view.onMount();
         lastRoute.view.attachEvents();
     }
 };
