@@ -27,11 +27,11 @@ export default class MeasureQueueTime extends AbstractView {
                         <h3>Cars Departure</h3>
                     </div>
                     <div class="section-row buttons">
-                        <button id="btn-turn-away" class="btn btn-primary btn-departure">
+                        <button id="btn-turning-away" class="btn btn-primary btn-departure">
                             <i class="fas fa-redo-alt fa-2x"></i>
                             <span>Turn Away</span>
                         </button>
-                        <button id="btn-leave-parking-lot" class="btn btn-primary btn-departure">
+                        <button id="btn-leaving" class="btn btn-primary btn-departure">
                             <i class="fas fa-arrow-left fa-2x"></i>
                             <span>Leave Parking</span>
                         </button>
@@ -83,11 +83,19 @@ export default class MeasureQueueTime extends AbstractView {
     onDepartureButtonClick(event, view) {
         const button = event.target.classList.contains('btn-sector') ? event.target : event.target.parentNode;
         const buttonDepType = button.id.replace('btn-', '');
+        const date = new Date(Date.now());
 
-        if (buttonDepType === 'turn-away')
-            window.plugins.toast.showLongBottom('The car has turned away before parking.');
-        else if (buttonDepType === 'leave-parking-lot')
-            window.plugins.toast.showLongBottom('The car has left the parking lot.');
+        let message = '';
+
+        if (buttonDepType === 'turning-away')
+            message = 'The record with turning car away saved.';
+        else if (buttonDepType === 'leaving')
+            message = 'The record with leaving car saved.';
+
+        view.app.db.insertRecord('departures', ['type', 'created_at'], {
+            type: buttonDepType,
+            created_at: `${date.toLocaleDateString()} ${date.toLocaleTimeString()}`
+        }).then(_ => window.plugins.toast.showLongBottom(message));
     }
 
     onStartMeasureTimeClick(event, view) {
@@ -99,14 +107,16 @@ export default class MeasureQueueTime extends AbstractView {
     }
 
     onStopMeasureTimeClick(event, view) {
-        const timestamp = Date.now();
-        const date = new Date(timestamp);
-
         const passedCar = view.carsQueue.shift();
         const duration = ((Date.now() - passedCar.start) / 1000).toFixed(2);
 
-        view.updateQueueList()
-        view.app.container.querySelector('.waiting-time').innerText = `${duration} seconds.`;
+        view.app.db.insertRecord('queue_times', ['duration', 'created_at'], {
+            duration: duration, created_at: `${passedCar.localeDate} ${passedCar.localeTime}`
+        }).then(_ => {
+            view.updateQueueList()
+            view.app.container.querySelector('.waiting-time').innerText = `${duration} seconds.`;
+            window.plugins.toast.showLongBottom('The record with car waiting in queue saved.');
+        });
     }
 
     onBackButtonClick(event, view) {
