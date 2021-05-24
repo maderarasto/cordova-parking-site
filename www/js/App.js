@@ -1,3 +1,4 @@
+import LocalDatabase from './LocalDatabase.js';
 import Home from './views/Home.js';
 import WatchSectors from './views/WatchSectors.js';
 import MeasureQueueTime from './views/MeasureQueueTime.js';
@@ -5,6 +6,7 @@ import MeasureQueueTime from './views/MeasureQueueTime.js';
 export default class App {
     constructor() {
         this.container = document.getElementById('app');
+        this.db = new LocalDatabase('parking_site_db');
         this.history = [];
         this.routes = [
             { name: 'home', params: {}, class: Home, view: null },

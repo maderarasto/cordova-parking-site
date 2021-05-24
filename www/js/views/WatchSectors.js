@@ -88,16 +88,24 @@ export default class WatchSectors extends AbstractView {
         const button = event.target.classList.contains('btn-sector') ? event.target : event.target.parentNode;
         const splitButtonId = [...button.id.matchAll(/(sector-[a-d])-(.*)/g)][0];
         const sector = view.sectors.find(sector => sector.selector.replace('.sector-cars', '').includes(splitButtonId[1]));
+        const date = new Date(Date.now());
 
         if (sector) {
-            sector.cars += (splitButtonId[2] === 'minus' ? -1 : splitButtonId[2] === 'plus' ? 1 : 0);
+            view.app.db.insertRecord('sectors', ['sector', 'type', 'created_at'], {
+                sector: splitButtonId[1].replace('sector-', ''),
+                type: splitButtonId[2] === 'minus' ? 'departure' : 'arrival',
+                created_at: `${date.toLocaleDateString()} ${date.toLocaleTimeString()}`
+            }).then(resultSet => {
+                sector.cars += (splitButtonId[2] === 'minus' ? -1 : splitButtonId[2] === 'plus' ? 1 : 0);
 
-            if (sector.cars === 0)
-                view.app.container.querySelector(`#${splitButtonId[1]}-minus`).classList.add('disabled');
-            else
-                view.app.container.querySelector(`#${splitButtonId[1]}-minus`).classList.remove('disabled');
+                if (sector.cars === 0)
+                    view.app.container.querySelector(`#${splitButtonId[1]}-minus`).classList.add('disabled');
+                else
+                    view.app.container.querySelector(`#${splitButtonId[1]}-minus`).classList.remove('disabled');
 
-            view.app.container.querySelector(sector.selector).innerText = `${sector.cars} cars`;
+                view.app.container.querySelector(sector.selector).innerText = `${sector.cars} cars`;
+                window.plugins.toast.showLongBottom(`Record with section ${splitButtonId[1].replace('sector-', '').toUpperCase()} was saved.`);
+            })
         }
     }
 
