@@ -7,7 +7,7 @@ export default class LocalDatabase {
         );
     }
 
-    selectRecord(tableName, columns, whereSql='', parameters=[]) {
+    selectRecords(tableName, columns, whereSql='', parameters=[]) {
         const formattedColumns = columns.join(', ');
         const sql = `SELECT ${formattedColumns} FROM ${tableName} ${whereSql !== '' ? 'WHERE ' : ''}${whereSql}`;
 
@@ -24,6 +24,14 @@ export default class LocalDatabase {
 
         return new Promise((resolve, reject) => {
             this.database.executeSql(sql, values, resultSet => resolve(resultSet), err => reject(err));
+        });
+    }
+
+    deleteRecords(tableName, whereSql='', parameters=[]) {
+        const sql = `DELETE FROM ${tableName} ${whereSql !== '' ? 'WHERE ' : ''}${whereSql}`;
+
+        return new Promise((resolve, reject) => {
+            this.database.executeSql(sql, parameters, resultSet => resolve(resultSet), err => reject(err));
         });
     }
 

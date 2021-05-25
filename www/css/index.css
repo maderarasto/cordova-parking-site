@@ -124,3 +124,24 @@
     justify-content: space-evenly;
     align-items: center;
 }
+
+.sectors-data .filter-toolbar {
+    display: flex;
+    margin: 15px;
+
+    justify-content: space-between;
+    align-items: center;
+}
+
+.sectors-data .sector-type {
+    margin-right: 1em !important;
+}
+
+.default-message {
+    position: absolute;
+    top: 50%;
+    display: block;
+    width: 100%;
+    transform: translateY(-50%);
+    text-align: center;
+}

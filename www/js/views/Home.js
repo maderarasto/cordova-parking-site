@@ -38,6 +38,7 @@ export default class Home extends AbstractView {
         const mappedRoutes = {
             'btn-sectors': 'watch-sectors',
             'btn-measure-time': 'measure-time',
+            'btn-sectors-data': 'sectors-data'
         };
 
         view.app.next(mappedRoutes[button.id]);

@@ -2,6 +2,7 @@ import LocalDatabase from './LocalDatabase.js';
 import Home from './views/Home.js';
 import WatchSectors from './views/WatchSectors.js';
 import MeasureQueueTime from './views/MeasureQueueTime.js';
+import SectorsData from './views/SectorsData.js';
 
 export default class App {
     constructor() {
@@ -12,6 +13,7 @@ export default class App {
             { name: 'home', params: {}, class: Home, view: null },
             { name: 'watch-sectors', params: {}, class: WatchSectors, view: null },
             { name: 'measure-time', params: {}, class: MeasureQueueTime, view: null },
+            { name: 'sectors-data', params: {}, class: SectorsData, view: null }
         ];
 
         screen.orientation.lock('portrait');
