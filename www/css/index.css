@@ -125,12 +125,14 @@
     align-items: center;
 }
 
-.sectors-data .filter-toolbar {
+.view .view-toolbar {
     display: flex;
     margin: 15px;
-
-    justify-content: space-between;
     align-items: center;
+}
+
+.view .view-toolbar.filter {
+    justify-content: space-between;
 }
 
 .sectors-data .sector-type {

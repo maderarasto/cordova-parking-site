@@ -19,7 +19,7 @@ export default class SectorsData extends AbstractView {
                     </div>
                     <div class="toolbar-options"></div>
                 </div>
-                <div class="filter-toolbar">
+                <div class="view-toolbar filter">
                     <span>Filter: </span>
                     <div class="btn-group" role="group" aria-label="Basic radio toggle button group">
                         <input type="radio" class="btn-check btn-filter" name="btnradio" id="btn-sector-all" autocomplete="off" checked>

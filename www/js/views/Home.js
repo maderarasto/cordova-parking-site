@@ -24,7 +24,7 @@ export default class Home extends AbstractView {
                         <i class="fas fa-list"></i>
                         <span class="d-block mt-2 fw-bold">Sectors Data</span>
                     </button>
-                    <button type="button" id="btn-measure-data" class="btn btn-primary rounded btn-main">
+                    <button type="button" id="btn-queue-times-data" class="btn btn-primary rounded btn-main">
                         <i class="fas fa-list"></i>
                         <span class="d-block mt-2 fw-bold">Queue Time Data</span>
                     </button>
@@ -38,7 +38,8 @@ export default class Home extends AbstractView {
         const mappedRoutes = {
             'btn-sectors': 'watch-sectors',
             'btn-measure-time': 'measure-time',
-            'btn-sectors-data': 'sectors-data'
+            'btn-sectors-data': 'sectors-data',
+            'btn-queue-times-data': 'queue-times-data'
         };
 
         view.app.next(mappedRoutes[button.id]);
