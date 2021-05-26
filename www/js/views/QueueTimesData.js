@@ -1,9 +1,11 @@
 import AbstractView from './AbstractView.js';
+import File from '../File.js';
 
 export default class QueueTimesData extends AbstractView {
     constructor(app, params) {
         super(app, params);
 
+        this.events.push({ selector: '#btn-export', type: 'click', handler: this.onExportButtonClick});
         this.events.push({ selector: '#btn-clear', type: 'click', handler: this.onClearButtonClick});
         this.events.push({ selector: '.toolbar-btn', type: 'click', handler: this.onBackButtonClick });
     }
@@ -57,6 +59,21 @@ export default class QueueTimesData extends AbstractView {
 
                     list.innerHTML += listItem;
                 }
+            });
+    }
+
+    onExportButtonClick(event, view) {
+        view.app.db.selectRecords('queue_times', ['duration', 'created_at'])
+            .then(resultSet => {
+                const file = new File('export_queue_times.csv');
+
+                for (let i = 0; i < resultSet.rows.length; i++) {
+                    const queueTimeItem = resultSet.rows.item(i);
+                    file.putLine(`${queueTimeItem.duration};${queueTimeItem.created_at}`);
+                }
+
+                file.flush();
+                window.plugins.toast.showLongBottom('Queue times records has been exported to app directory.');
             });
     }
 

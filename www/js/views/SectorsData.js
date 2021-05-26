@@ -1,10 +1,12 @@
 import AbstractView from './AbstractView.js';
+import File from './../File.js';
 
 export default class SectorsData extends AbstractView {
     constructor(app, params) {
         super(app, params);
 
         this.events.push({ selector: '#btn-clear', type: 'click', handler: this.onClearButtonClick});
+        this.events.push({ selector: '#btn-export', type: 'click', handler: this.onExportButtonClick});
         this.events.push({ selector: '.btn-filter', type: 'click', handler: this.onFilterButtonClick});
         this.events.push({ selector: '.toolbar-btn', type: 'click', handler: this.onBackButtonClick });
     }
@@ -85,6 +87,21 @@ export default class SectorsData extends AbstractView {
         const filterBy = event.target.id.replace('btn-sector-', '');
 
         view.updateSectorList(filterBy);
+    }
+
+    onExportButtonClick(event, view) {
+        view.app.db.selectRecords('sectors', ['sector', 'type', 'created_at'])
+            .then(resultSet => {
+                const file = new File('export_sectors.csv');
+
+                for (let i = 0; i < resultSet.rows.length; i++) {
+                    const sectorItem = resultSet.rows.item(i);
+                    file.putLine(`${sectorItem.sector};${sectorItem.type};${sectorItem.created_at}`);
+                }
+
+                file.flush();
+                window.plugins.toast.showLongBottom('Sectors records has been exported to app directory.');
+            });
     }
 
     onClearButtonClick(event, view) {

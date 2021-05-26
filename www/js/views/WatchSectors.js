@@ -110,6 +110,17 @@ export default class WatchSectors extends AbstractView {
     }
 
     onMount() {
-        this.checkButtonsAvailability();
+        this.app.db.selectRecords('sectors', ['sector', 'type'])
+            .then(resultSet => {
+                for (let i = 0; i < resultSet.rows.length; i++) {
+                    const sectorItem = resultSet.rows.item(i);
+                    const foundSector = this.sectors.find(sector => sector.selector.replace('.sector-cars', '').includes(`sector-${sectorItem.sector}`));
+
+                    foundSector.cars += sectorItem.type === 'arrival' ? 1 : -1;
+                    this.app.container.querySelector(foundSector.selector).innerText = `${foundSector.cars} cars`;
+                }
+
+                this.checkButtonsAvailability();
+            })
     }
 }
